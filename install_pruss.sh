@@ -19,15 +19,6 @@ echo "Grabbing userspace driver"
 git clone https://github.com/beagleboard/am335x_pru_package.git
 cd am335x_pru_package
 
-# Apply the patch to prevent interrupts being fired twice
-echo "Patching driver to prevent double interrupts"
-wget http://e2e.ti.com/cfs-file.ashx/__key/telligent-evolution-components-attachments/00-791-00-00-00-23-97-35/attachments.tar.gz
-tar -xzf attachments.tar.gz
-patch -p1 <  0001-Fix-for-duplicated-interrupts-when-interrupts-are-se.patch
-
-# Apply patch to remove needless printf statements
-patch -p1 < ../patches/Remove-needless-printfs.patch
-
 # Build driver as shared library
 echo "Building driver"
 cd pru_sw/app_loader/interface/
